@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+		<link rel="alternate" hreflang="en" href="/" />
+		
+		
+		<link rel="icon" href="/icon/favicon.ico" type="image/x-icon" />
+		
+		<title>Gate</title>
+		<style>
+			
+			@font-face {
+				font-family: 'Consolas';
+				src: url('Consolas.ttf');
+			}
+			
+			html, body {
+				margin: 0px;
+			}
+			body {
+				font-family: 'Consolas';
+			}
+			a, span {
+				color: #FFF;
+			}
+			#dl-lnk {
+				font-size: 64px;
+				font-family: 'Impact';
+				text-transform: uppercase;
+				text-decoration: none;
+			}
+			#warning {
+				color: #FF0000;
+			}
+			#information {
+				color: #00FFFF;
+			}
+			.notification {
+				text-transform: uppercase;
+				font-weight: bold;
+				text-decoration: underline;
+			}
+			#credits {
+				margin-top: 50px;
+			}
+			#code-holder {
+				position: absolute;
+				z-index: -1;
+			}
+			#code-holder, #code {
+				width: 100%;
+				height: 100%;
+			}
+			#code {
+				resize: none;
+				font-family: 'Consolas';
+				border: none;
+				outline: none;
+				background-color: #000;
+				color: rgba(0, 128, 0, 0.7);
+				overflow: hidden;
+			}
+			#new-feature {
+				margin-top: 50px;
+			}
+			#new-feature #new-feature-wrapper {
+				padding: 10px;
+				padding-top: 0px;
+				display: inline-block;
+				border: 3px dashed #2EB9CE;
+			}
+			#new-feature-img {
+				width: 331px;
+				height: 227px;
+				background-image: url('newfeature.gif');
+				-webkit-box-shadow: 0px 0px 5px 5px #5F105C;
+				-moz-box-shadow: 0px 0px 5px 5px #5F105C;
+				box-shadow: 0px 0px 5px 5px #5F105C;
+			}
+		</style>
+		<script>
+for(var m="function"==typeof Object.defineProperties?Object.defineProperty:function(c,k,l){c!=Array.prototype&&c!=Object.prototype&&(c[k]=l.value)},r="undefined"!=typeof window&&window===this?this:"undefined"!=typeof global&&null!=global?global:this,v=["String","prototype","repeat"],w=0;w<v.length-1;w++){var x=v[w];x in r||(r[x]={});r=r[x]}
+var y=v[v.length-1],z=r[y],C=z?z:function(c){if(null==this)throw new TypeError("The 'this' value for String.prototype.repeat must not be null or undefined");var k=this+"";if(0>c||1342177279<c)throw new RangeError("Invalid count value");c|=0;for(var l="";c;)if(c&1&&(l+=k),c>>>=1)k+=k;return l};C!=z&&null!=C&&m(r,y,{configurable:!0,writable:!0,value:C});
+window.onload=function(){function c(b,a){0==b.length?a&&a():(t.value+=b.charAt(0),t.scrollTop=t.scrollHeight,setTimeout(function(){c(b.substr(1),a)},5))}function k(){var a="";do{var c=Math.floor(5*Math.random())+5;for(var f=0;f<c;f++){var d=Math.floor(3*Math.random());f||2!=d||(d-=Math.floor(1*Math.random())+1);a+=String.fromCharCode(Math.floor(Math.random()*(d&&1!=d?10:26))+(d?1==d?97:48:65))}}while(-1!=e.indexOf(a));return a}function l(){switch(Math.floor(5*Math.random())){case 0:return"true";case 1:return"'$v1' == '$v1'";
+case 2:return(e[Math.floor(Math.random()*e.length)]||"$v1")+" == '$v2'";case 3:return(e[Math.floor(Math.random()*e.length)]||"$v1")+" > $r1";case 4:return"window."+A[Math.floor(Math.random()*A.length)]}}function q(){u++;n++}function B(){u=0;for(var b=Math.floor(16*Math.random());(10<=b&&14>b||4==b)&&!n;)b=Math.floor(16*Math.random());10<n&&(b=4);switch(b){case 0:a+="$tfor (var $v1 = 0; $v1 < $r1; $v1++) {";g.push("for");h.push(null);q();break;case 1:a+="$tvar $v1 = Math.floor(Math.random() * $r1) + $r1;\n$twhile($v1 > $r1) {\n$t\tconsole.log('Hacker ' + $e1 + '!');\n$t\tvar $v2 = '$v3';\n$t}";
+break;case 2:a+="$tdo {";g.push("do");h.push(null);q();break;case 3:a+="$twhile ("+l()+") {";g.push("while");h.push(null);q();break;case 10:case 11:case 12:case 13:case 4:if(0<n){b=g[g.length-1];var c=h[h.length-1],f=.5<Math.random();switch(b){case "do":a+="$t} while ($e1 != $v2);";break;case "while":a+="$t}";break;case "if":a=f?a+"$t} else {":a+"$t}";break;case "for":a+="$t}";break;case "xhr":a+="$t}\n$t"+c.name+".send($e1);";break;case "else":a+="$t}"}f&&"if"==b?(u=1,g.pop(),h.pop(),g.push("else"),
+h.push(null)):(g.pop(),h.pop(),n--)}break;case 5:a+="$tif ("+l()+") {";g.push("if");h.push(null);q();break;case 6:case 7:case 8:case 9:if(.5<Math.random())if(.5<Math.random())if(.25>Math.random()){c="'";f=Math.floor(160*Math.random())+16;for(b=0;b<f;b++){var d=(Math.floor(254*Math.random())+1).toString(16);c+="\\x"+"00".substr(d.length)+d;b%10||(c+="' + \n$t'")}a+="$tvar $v1 = "+(c+"';")}else a+="$tvar $v1 = '$s1' + $e1;";else a+="$tvar $v1 = '$s1';";else a=.5<Math.random()?a+"$tvar $v1 = $r1 * $r2;":
+a+"$tvar $v1 = $r1;";break;case 14:a+="$tvar $v1 = new XMLHttpRequest();\n$t$v1.open('POST', 'http://$s1$s2.onion/$s3.php', true);\n$t$v1.send($e1);";break;case 15:b=k(),e.push(b),a+="$tvar "+b+" = new XMLHttpRequest();\n$t"+b+".open('POST', 'http://$s1$s2.onion/$s3.php', true);\n$t"+b+".onload = function() {",g.push("xhr"),h.push({name:b}),q()}for(c=/\$[vres]\d{1}/gi;null!==(f=c.exec(a));)for(b=0;b<f.length;b++){d=f[b];var p=k();"V"!=d.charAt(1).toUpperCase()&&"E"==d.charAt(1).toUpperCase()&&0<e.length&&
+(p=e[Math.floor(Math.random()*e.length)]);"R"==d.charAt(1).toUpperCase()?p=Math.floor(65535*Math.random())+255:"S"==d.charAt(1).toUpperCase()?p=k():-1==e.indexOf(p)&&e.push(p);a=a.split(d).join(p)}100<e.length&&(e=e.splice(99,e.length-100));a=a.split("$t").join("\t".repeat(n-u));a+="\n";D()}function D(){c(a,function(){a="";setTimeout(B,100)})}var t=document.getElementById("code"),a="",n=0,u=0,e=[],g=[],h=[],A=Object.keys(window);setTimeout(B,100)};
+		</script>
+	</head>
+	<body>
+		<center>
+		 	 <div id="code-holder">
+				 <textarea id="code" readonly></textarea>
+			 </div>
+			 <table>
+				 <tr>
+					<td valign="top"><span></span></td>
+					<td><a id="dl-lnk">&raquo;Wellcome to the New World&laquo;</a></td>
+				 </tr>
+				 
+
+				 <tr>
+					<td valign="top"><span></span></td>
+					<td align="center"><a id="dl-lnk">The real gate</a></td>
+				 </tr>
+				
+				
+				 <tr>
+					<td><span></span></td>
+					<td align="center"><span><a href="wonderland/index.html">Tap to join</a></span></td>
+				 </tr>
+				
+			 </table>
+			 
+			 <div id="credits">
+				<span>&copy; 2017 - <a href="feedback/feedback.html">Suggestions/Feedback/Contact</a></span>
+			 </div>
+			 
+		 </center>
+		 
+		 <script language="JavaScript">
+            <!--
+            function MM_displayStatusMsg(msgStr) { //v2.0
+            status=msgStr;
+            document.MM_returnValue = true;
+            }
+            function click() {
+            if (event.button==2) {
+            alert('You dont deverve it');
+            }
+            }
+            document.onmousedown=click
+            function MM_openBrWindow(theURL,winName,features) { //v2.0
+            window.open(theURL,winName,features);
+            }
+            //-->
+         </script>
+		
+		     <audio id="bgaudio" src="Gate.mp3" loop="infinite" autoplay="autoplay"></audio>
+			     <script type="text/javascript">
+			     document.getElementById('bgaudio').play();
+			 </script>	 
+			 			 
+	</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+ <html class="no-js">
+   <head>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=big5">
+   <meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
+   <style type="text/css">
+
+	#tfnewsearch{
+		float:right;
+		padding:20px;
+	}
+	.tftextinput{
+		margin: 0;
+		padding: 5px 15px;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size:14px;
+		border:1px solid #0076a3; border-right:0px;
+		border-top-left-radius: 5px 5px;
+		border-bottom-left-radius: 5px 5px;
+	}
+	.tfbutton {
+		margin: 0;
+		padding: 5px 15px;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size:14px;
+		outline: none;
+		cursor: pointer;
+		text-align: center;
+		text-decoration: none;
+		color: #ffffff;
+		border: solid 1px #0076a3; border-right:0px;
+		background: #0095cd;
+		background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
+		background: -moz-linear-gradient(top,  #00adee,  #0078a5);
+		border-top-right-radius: 5px 5px;
+		border-bottom-right-radius: 5px 5px;
+	}
+	.tfbutton:hover {
+		text-decoration: none;
+		background: #007ead;
+		background: -webkit-gradient(linear, left top, left bottom, from(#0095cc), to(#00678e));
+		background: -moz-linear-gradient(top,  #0095cc,  #00678e);
+	}
+	/* Fixes submit button height problem in Firefox */
+	.tfbutton::-moz-focus-inner {
+	  border: 0;
+	}
+	.tfclear{
+		clear:both;
+	}
+</style>
+   <link rel="icon" href="/../icon/favicon.ico" type="image/x-icon" />
+   
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />	
+		<link rel="stylesheet" type="text/css" href="css/component.css" />
+		<style>
+		.top-banner {
+			z-index: 999;
+			text-align: right;
+			height: 30px !important;
+			line-height: 30px !important;
+		}
+		.top-banner a {
+			color:green !important;
+			text-shadow: none;
+		}
+		.column {
+			margin: 60px auto;
+			float: none;
+			text-align: center;
+			width: 75%;
+			min-height: 100px;
+		}
+		</style>
+		<script src="js/modernizr.custom.js"></script>
+	    <script language=Javascript> 
+  function time(){
+    //獲得顯示時間的div
+    t_div = document.getElementById('showtime');
+   var now=new Date()
+    //替換div內容
+   t_div.innerHTML = +now.getFullYear()
+    +"年"+(now.getMonth()+1)+"月"+now.getDate()
+    +"日"+now.getHours()+"時"+now.getMinutes()
+    +"分"+now.getSeconds()+"秒";
+    //等待一秒鐘後調用time方法，由于settimeout在time方法內，所以可以無限調用
+   setTimeout(time,1000);
+  }
+</script>
+     <title>NEW WORLD</title>
+   </head>
+   <body link="blue" onload="time()">
+   
+     <div id="st-container" class="st-container">
+	 <div class="st-pusher">
+	         <nav class="st-menu st-effect-14" id="menu-14">
+					<h2 class="icon icon-stack">Sidebar</h2>
+					<ul>
+						<li><a class="icon icon-data" href="sidebar/check in.html">簽到</a></li>
+						<li><a class="icon icon-location" href="sidebar/SAO.html">SAO</a></li>
+						<li><a class="icon icon-study" href="sys/illuminati.html">嘗試進入光明會</a></li>
+						<li><a class="icon icon-photo" href="sidebar/The Polar Express.html">There is a reason</a></li>
+						<li><a class="icon icon-wallet" href="storage/">storage</a></li>
+					</ul>
+			 </nav>
+	 <div class="st-content">
+	 <div class="st-content-inner">
+	 <div class="main clearfix">
+	 <div id="st-trigger-effects" class="column">
+
+        <center>
+		
+	         <h1><font size="7" font color="red">WolfHeluo in Wonderland</font></h1>
+			 
+			 
+			 
+			 <form id="tfnewsearch" method="get" action="http://mrdoob.com/projects/chromeexperiments/google-sphere/">
+		         <input type="text" class="tftextinput" name="q" size="35" maxlength="120"><input type="submit" value="search" class="tfbutton">
+		     </form>
+	         <div class="tfclear"></div>
+	 
+	 
+	         <font size="5">
+	         a fantasy world in a silent dream
+	         </font>
+	    
+	 
+	 
+	     </center>
+	 
+	     <audio controls autoplay style="display:none" loop="infinite">
+             <source src="host BGM.mp3">
+	     </audio>
+		 
+		 <button data-effect="st-effect-14">Sidebar</button>
+	 
+	     <div id="showtime" style="text-align:right"valign=bottom></div>
+		 </div>
+		 </div>
+		 </div>
+		 </div>
+		 </div>
+		 </div>		 
+	 <script src="js/classie.js"></script>
+	 <script src="js/sidebarEffects.js"></script>
+	 
+	 <footer>
+         <p>
+         <div style="text-align:center;">&copy; 2017 - Powered by <a href="https://twitter.com/Aigner0411" target="_blank"><font color=red>anonymous0411</font></a></div>
+         </p>
+     </footer>
+	 
+   </body>
+ </html>

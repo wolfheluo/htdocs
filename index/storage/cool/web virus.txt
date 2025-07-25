@@ -1,0 +1,12 @@
+@echo off
+:A
+start www.google.com
+start www.gmail.com
+start www.hotmail.com
+start www.youtube.com
+start www.google.com
+start www.gmail.com
+start www.hotmail.com
+start www.youtube.com
+ping localhost -m 2 >nul
+goto :A

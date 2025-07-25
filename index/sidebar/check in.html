@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+      <html>
+         <head>
+		 <link rel="icon" href="../../icon/favicon.ico" type="image/x-icon" />
+		 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=big5">
+		 <style>
+             html {height: 100%;}
+             body {background-image:check in.jpg;
+                 background-repeat: no-repeat;
+                 background-attachment: fixed;
+                 background-position: center;
+                 background-size: cover;}
+         </style>
+		 
+		 </head>
+		
+		 <body background="check in.jpg">
+		 
+		     <a href="../index.html"><img width=50 height=50 src="return.png"></a>
+			 
+		     <center><h1><b><font face="標楷體" size="7">~每日簽到~</font></b></h1></center>
+			 			 
+             <table align="center" border="0"> 
+     <tr> 
+     <td ><font color="#0080FF" size="1"> 
+     <script language="JavaScript"> 
+     <!--  
+     var passingtraveller=1
+     var vag=3
+     var jackaroostudent=5
+     var plebeian=8
+     var jackarooswordman=10 
+     var swordman=13 
+     var jackarooknight=15 
+     var knight=18
+     var jackarooecromancer=20
+     var ecromancer=23 
+     var jackaroonchanter=25 
+     var nchanter=28
+     var jackarooflamen =30 
+     var flamen=33 
+     var jackaroofairy =35 
+     var fairy=38
+     var jackarooangel=40 
+     var angel=43 
+     var archangel=45 
+     var principalityangel=48
+     var powerangel=50 
+     var virtueangel=55 
+     var dominionangel=60 
+     var throneangel=70 
+     var cherubangel=80 
+     var seraph=90 
+     var hermit=100 
+     
+     var passingtravellertext="過客"
+     var vagtext="遊民" 
+     var jackaroostudenttext="實習生" 
+     var plebeiantext="國民" 
+     var jackarooswordmantext="侍從"
+     var swordmantext="劍客" 
+     var jackarooknighttext="實習騎士" 
+     var knighttext="騎士" 
+     var jackarooecromancertext="皇家騎士" 
+     var ecromancertext="巫師"
+     var jackaroonchantertext="實習魔法師" 
+     var nchantertext="魔法師" 
+     var jackarooflamentext="大魔導士" 
+     var flamentext="祭司" 
+     var jackaroofairytext="分靈體"
+     var fairytext="精靈" 
+     var jackarooangeltext="暗夜精靈" 
+     var angeltext="天使" 
+     var archangeltext="大天使" 
+     var principalityangeltext="權天使"
+     var powerangeltext="力天使" 
+     var virtueangeltext="德天使" 
+     var dominionangeltext="主天使" 
+     var throneangeltext="座天使" 
+     var cherubangeltext="智天使"
+     var seraphtext="熾天使" 
+     var hermittext="隱者" 
+     var toptext="最高等級"
+     
+     function getCookieVal (offset) { 
+     var endstr=document.cookie.indexOf(";", offset); 
+     if (endstr == -1) endstr=document.cookie.length; 
+     return unescape(document.cookie.substring(offset, endstr)); 
+     } 
+     
+     function GetCookie (name) { 
+     var arg=name+"="; 
+     var alen=arg.length; 
+     var clen=document.cookie.length; 
+     var i=0; 
+     while (i < clen) { 
+     var j=i+alen; 
+     if (document.cookie.substring(i, j) == arg) return getCookieVal (j); 
+     i=document.cookie.indexOf(" ", i)+1; 
+     if (i == 0) break; 
+     } 
+     return null; 
+     } 
+     
+     function SetCookie (name, value) { 
+     var argv = SetCookie.arguments; 
+     var argc = SetCookie.arguments.length; 
+     var expires = (argc > 2) ? argv[2] : null; 
+     var path = (argc > 3) ? argv[3] : null; 
+     var domain = (argc > 4) ? argv[4] : null; 
+     var secure = (argc > 5) ? argv[5] : false; 
+     document.cookie = name + "=" + escape (value) + 
+     ((expires == null) ? "" : ("; expires=" + expires.toGMTString())) + 
+     ((path == null) ? "" : ("; path=" + path)) + 
+     ((domain == null) ? "" : ("; domain=" + domain)) + 
+     ((secure == true) ? "; secure" : ""); 
+     } 
+     
+     function show_count() { 
+     var expdate=new Date(); 
+     var num; 
+     expdate.setTime(expdate.getTime()+(24*60*60*1000*60)); 
+     if(!(GetCookie("name"))) num=0; 
+     else num=GetCookie("count"); 
+     if (num != 0) { 
+     if (num == 1) document.write("<font face=標楷體 color=blue size=5>這是您第一次拜訪本網，請儘情瀏覽！！<br>"); 
+     else document.write("<font face=標楷體 color=blue size=5>您已來過"+num+" 次了，離二次元越來越近了！<br>"); 
+     document.write("目前等級："); 
+     if (num < passingtraveller) document.write(passingtravellertext); 
+     else if (num < vag) document.write(vagtext);
+     else if (num < jackaroostudent) document.write(jackaroostudenttext);
+     else if (num < plebeian) document.write(plebeiantext);
+     else if (num < jackarooswordman) document.write(jackarooswordmantext);  
+     else if (num < swordman) document.write(swordmantext);
+     else if (num < jackarooknight) document.write(jackarooknighttext); 
+     else if (num < knight) document.write(knighttext); 
+     else if (num < jackarooecromancer) document.write(jackarooecromancertext); 
+     else if (num < ecromancer) document.write(ecromancertext); 
+     else if (num < jackaroonchanter) document.write(jackaroonchantertext);
+     else if (num < nchanter) document.write(nchantertext); 
+     else if (num < jackarooflamen) document.write(jackarooflamentext); 
+     else if (num < flamen) document.write(flamentext); 
+     else if (num < jackaroofairy) document.write(jackaroofairytext);
+     else if (num < fairy) document.write(fairytext);
+     else if (num < jackarooangel) document.write(jackarooangeltext);
+     else if (num < angel) document.write(angeltext);
+     else if (num < archangel) document.write(archangeltext);
+     else if (num < principalityangel) document.write(principalityangeltext);
+     else if (num < powerangel) document.write(powerangeltext);
+     else if (num < virtueangel) document.write(virtueangeltext);
+     else if (num < dominionangel) document.write(dominionangeltext); 
+     else if (num < throneangel) document.write(throneangeltext);
+     else if (num < cherubangel) document.write(cherubangeltext);
+     else if (num < seraph) document.write(seraphtext);
+     else if (num < hermit) document.write(hermittext);
+     else {document.write(toptext)}; 
+     document.write("</font><br>"); 
+     if (num>hermit) 
+     {
+     document.write("<font face=細明體 color=black size=3>你已經是最高等級了www</font><br>") } 
+     else { 
+     document.write("<font face=細明體 color=black size=3>如果想提升等級的話，要常回來逛喔</font><br>")}; 
+     } 
+     num++; 
+     SetCookie("count", num, expdate); 
+     } 
+     
+     function auto_show_name() { 
+     if(GetCookie("name") != null) { 
+     
+     } else { 
+     document.write("<font face=標楷體 color=blue size=5>由於你是第一次拜訪，<br>所以請登錄你的姓名，<br>通往另一個世界的大門將會為你而開…</b></font><br>"); 
+     document.write("<FORM NAME=\"jeffform1\"><INPUT TYPE=\"button\" VALUE=\"登錄\" onClick=\"set_name(jeffform1.nameinput.value,0)\"><INPUT TYPE=\"RESET\" VALUE=\"重新輸入\"><br><font size=3>請輸入你的姓名：<INPUT TYPE = \"text\" NAME = \"nameinput\"></FORM>"); 
+     } 
+     } 
+     
+     function set_name(cookie_name,flag) { 
+     var expdate = new Date (); 
+     expdate.setTime(expdate.getTime()+(24*60*60*1000*60)); 
+     var username=cookie_name; 
+     if (flag == 0) { 
+     if (username != "") { 
+     if (confirm("你名字是“"+username+"”，你確定嗎？")) { 
+     SetCookie ("name", username, expdate); 
+     window.history.go(0); 
+     } 
+     } else 
+     alert("抱歉！！請先輸入你的姓名，謝謝。"); 
+     } 
+     } 
+     // -->
+     </script>
+     <script language="JavaScript"> 
+     auto_show_name(); 
+     show_count(); 
+     </script> 
+     </font> 
+     </td> 
+     </tr> 
+     </table>	    
+		 		 <script language="JavaScript">
+            <!--
+            function MM_displayStatusMsg(msgStr) { //v2.0
+            status=msgStr;
+            document.MM_returnValue = true;
+            }
+            function click() {
+            if (event.button==2) {
+            alert('右鍵不是什麼好東西，不要隨便亂按阿( ’?ˋ)');
+            }
+            }
+            document.onmousedown=click
+            function MM_openBrWindow(theURL,winName,features) { //v2.0
+            window.open(theURL,winName,features);
+            }
+            //-->
+         </script>
+		 	 <audio controls autoplay style="display:none" loop="infinite">
+                 <source src="check in.mp3">
+	         </audio>
+		 
+		 
+	     </body>
+	 </html>
