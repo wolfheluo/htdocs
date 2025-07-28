@@ -57,7 +57,6 @@
         <div class="hero-content">
             <h1 class="hero-title">Welcome to Wonderland</h1>
             <p class="hero-subtitle">Explore the Fantasy Boundaries Between Dreams and Reality</p>
-            <button class="cta-button" onclick="scrollToSection('about')">Start Exploring</button>
         </div>
     </section>
 
