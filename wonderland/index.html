@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wonderland - Fantasy World</title>
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- 背景音樂 -->
+    <audio id="backgroundMusic" loop>
+        <source src="assets/audio/The girl In The Forest.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- 導覽列 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home">
+                    <img src="assets/images/logo.svg" alt="Wonderland Logo" class="logo">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">ABOUT US</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#services" class="nav-link">SERVICES</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">CONTACT</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 音樂控制按鈕 (右下角) -->
+    <div class="music-control-fixed">
+        <button id="musicToggle" class="music-btn">🎵</button>
+    </div>
+
+    <!-- 主頁區域 -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="slideshow-container">
+                <div class="slide active">
+                    <img src="assets/images/homeBG.webp" alt="Fantasy Background">
+                </div>
+            </div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome to Wonderland</h1>
+            <p class="hero-subtitle">Explore the Fantasy Boundaries Between Dreams and Reality</p>
+            <button class="cta-button" onclick="scrollToSection('about')">Start Exploring</button>
+        </div>
+    </section>
+
+    <!-- 關於我們區域 -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">ABOUT US</h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-item">
+                    <div class="about-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Power of Dreams</h3>
+                    <p>In this fantastical world, every dream has the possibility to come true. We believe imagination is the most powerful force to change the world, capable of transcending the boundaries of reality and creating infinite possibilities.</p>
+                </div>
+                <div class="about-item">
+                    <div class="about-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" stroke="currentColor" stroke-width="2"/>
+                            <polyline points="3.27,6.96 12,12.01 20.73,6.96" stroke="currentColor" stroke-width="2"/>
+                            <line x1="12" y1="22.08" x2="12" y2="12" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Explore the Unknown</h3>
+                    <p>Life is like an endless adventure, with every step filled with surprises and challenges. We encourage stepping out of comfort zones to discover the miracles and beauty hidden in daily life.</p>
+                </div>
+                <div class="about-item">
+                    <div class="about-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                            <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Dreams and Reality</h3>
+                    <p>Between dreams and reality exists a subtle boundary. Sometimes, the most beautiful reality comes from the wildest dreams. Let's find our own balance on this blurred line together.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服務區域 -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">SERVICES</h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="services-grid" id="servicesGrid">
+                <!-- Service cards will be dynamically generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 聯絡區域 -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">CONTACT</h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p>Feel free to contact us through the following methods to explore more possibilities together.</p>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <span class="contact-label">Line Official Account</span>
+                            <a href="https://lin.ee/cdZA0Ok" target="_blank" class="contact-link">
+                                Click to Join Official Account
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2017 - Powered by wolfheluo.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
