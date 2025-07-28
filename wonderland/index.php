@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,12 +10,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <!-- 背景音樂 -->
+    <!-- Background Music -->
     <audio id="backgroundMusic" loop>
         <source src="assets/audio/The girl In The Forest.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- 導覽列 -->
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
@@ -40,12 +40,12 @@
         </div>
     </nav>
 
-    <!-- 音樂控制按鈕 (右下角) -->
+    <!-- Music Control Button (Bottom Right) -->
     <div class="music-control-fixed">
         <button id="musicToggle" class="music-btn">🎵</button>
     </div>
 
-    <!-- 主頁區域 -->
+    <!-- Home Section -->
     <section id="home" class="hero">
         <div class="hero-background">
             <div class="slideshow-container">
@@ -61,7 +61,7 @@
         </div>
     </section>
 
-    <!-- 關於我們區域 -->
+    <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
             <div class="section-header">
@@ -103,7 +103,7 @@
         </div>
     </section>
 
-    <!-- 服務區域 -->
+    <!-- Services Section -->
     <section id="services" class="services">
         <div class="container">
             <div class="section-header">
@@ -116,7 +116,7 @@
         </div>
     </section>
 
-    <!-- 聯絡區域 -->
+    <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
             <div class="section-header">
@@ -145,7 +145,7 @@
         </div>
     </section>
 
-    <!-- 頁尾 -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2017 - Powered by wolfheluo.</p>

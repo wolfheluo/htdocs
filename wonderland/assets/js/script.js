@@ -24,14 +24,27 @@ function initSmoothScrolling() {
     });
 }
 
-// 音樂控制功能
+// Music control functionality
 function initMusicControl() {
     const audio = document.getElementById('backgroundMusic');
     const musicToggle = document.getElementById('musicToggle');
     let isPlaying = false;
 
-    // 預設音樂為暫停狀態
+    // Set default volume to 30%
     audio.volume = 0.3;
+
+    // Auto-start music when page loads (with user interaction requirement handled)
+    $(document).one('click', function() {
+        if (!isPlaying) {
+            audio.play().then(() => {
+                musicToggle.innerHTML = '🎶';
+                musicToggle.style.background = 'var(--gradient-accent)';
+                isPlaying = true;
+            }).catch((error) => {
+                console.log('Music playback failed:', error);
+            });
+        }
+    });
 
     musicToggle.addEventListener('click', function() {
         if (isPlaying) {
@@ -52,7 +65,7 @@ function initMusicControl() {
         }
     });
 
-    // 音樂結束時重置按鈕
+    // Reset button when music ends
     audio.addEventListener('ended', function() {
         musicToggle.innerHTML = '🎵';
         musicToggle.style.background = 'var(--gradient-bg)';
@@ -62,8 +75,15 @@ function initMusicControl() {
 
 // Load services data
 function initServicesLoader() {
-    $.getJSON('services.json')
-        .done(function(data) {
+    // Try to load services from PHP endpoint
+    fetch('./get_services.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
             const servicesGrid = $('#servicesGrid');
             
             if (data.services && data.services.length > 0) {
@@ -81,7 +101,8 @@ function initServicesLoader() {
                 servicesGrid.html('<p class="no-services">No services available at the moment</p>');
             }
         })
-        .fail(function() {
+        .catch(error => {
+            console.error('Error loading services:', error);
             $('#servicesGrid').html('<p class="error-message">Failed to load services data, please try again later</p>');
         });
 }

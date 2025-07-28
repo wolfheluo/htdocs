@@ -1,18 +1,66 @@
-# Wonderland 網頁 UI 敘述
+# Wonderland Website Description
 
-本網站以奇幻世界為主題，設計風格夢幻且富有想像力。首頁導覽列包含「HOME」、「ABOUT US」、「SERVICES」、「CONTACT」四大區塊，方便使用者快速瀏覽。
+This website features a fantasy world theme with a dreamy and imaginative design style. The homepage navigation includes four main sections: "HOME", "ABOUT US", "SERVICES", and "CONTACT" for easy user browsing.
 
-主視覺區以大字標語呈現，搭配背景幻燈片動畫，營造沉靜夢境氛圍。首頁背景幻燈片以淡入淡出方式切換圖片，呈現流暢且柔和的視覺轉換。導覽列、按鈕等互動元素則運用滑入、漸變、色彩變化等動畫效果，提升使用者操作的動態感與趣味性。
-各區塊內容如下：
+The main visual area presents large text slogans with background slideshow animations, creating a serene dreamlike atmosphere. The homepage background slideshow uses fade-in and fade-out transitions between images, presenting smooth and gentle visual transitions. Interactive elements such as navigation, buttons use slide-in, gradient, color change and other animation effects to enhance the dynamic and interesting user experience.
 
-logo.svg 放在左上角。可以點擊回到頁首。
+Each section contains the following:
 
-- ABOUT US：以圖示與標題強調信念，並以多段文字敘述人生哲理、探討夢境與現實的界線。
-- SERVICES：讀取services.json。並建立相關卡片。
-- CONTACT：提供我的 Line Official Account https://lin.ee/cdZA0Ok (可配有小圖示)
+The logo.svg is placed in the upper left corner. Clicking it returns to the top of the page.
 
-頁尾簡潔，標示版權資訊。 "© 2017 - Powered by wolfheluo."
+- ABOUT US: Emphasizes beliefs with icons and titles, describing life philosophy and exploring the boundaries between dreams and reality through multiple paragraphs.
+- SERVICES: Reads services.json and creates related cards. Simply displays service titles and URLs as clickable links.
+- CONTACT: Provides my Line Official Account https://lin.ee/cdZA0Ok (with small icon available)
 
-整體配色柔和，搭配 SVG 圖示與 Web 字型，提升視覺質感。響應式設計支援多裝置瀏覽，並內嵌背景音樂，增添沉浸感。
+The footer is simple, indicating copyright information. "© 2017 - Powered by wolfheluo."
 
-主要技術包含 HTML5、CSS3、jQuery 及多種 JS 插件，確保互動性與現代化體驗。
+The overall color scheme is elegant white and gray minimalist style, paired with SVG icons and web fonts to enhance visual quality. Responsive design supports multi-device browsing, and embedded background music adds immersion.
+
+## Key Features
+
+- **Modern Minimalist Design**: Clean white and gray color scheme
+- **Responsive Layout**: Works perfectly on desktop, tablet, and mobile devices
+- **Background Music**: Auto-plays at 30% volume with user-friendly controls in bottom-right corner
+- **Smooth Animations**: Fade-in effects and hover animations throughout
+- **Dynamic Services**: Automatically loads service information from JSON with fallback support
+- **Multi-language Support**: Full English content with modern typography
+
+## Technical Stack
+
+Main technologies include HTML5, CSS3, jQuery, PHP and various JS plugins to ensure interactivity and modern experience.
+
+## File Structure
+
+```
+wonderland/
+├── index.php              # Main PHP file
+├── get_services.php       # PHP endpoint for loading services
+├── README.md              # This file
+├── services.json          # Service data
+└── assets/
+    ├── css/
+    │   └── style.css      # Main stylesheet
+    ├── js/
+    │   └── script.js      # Main JavaScript file
+    ├── images/
+    │   ├── favicon.ico    # Website icon
+    │   ├── homeBG.webp    # Homepage background
+    │   └── logo.svg       # Website logo
+    └── audio/
+        └── The girl In The Forest.mp3  # Background music
+```
+
+## Browser Support
+
+- Chrome (recommended)
+- Firefox
+- Safari
+- Edge
+
+## Setup
+
+1. **Web Server Required**: This project uses PHP, so you need a web server with PHP support
+2. **XAMPP/WAMP/LAMP**: Recommended for local development
+3. **Access**: Open `index.php` in your browser via the web server (e.g., `http://localhost/wonderland/index.php`)
+4. **PHP Version**: PHP 7.0 or higher recommended
+5. Ensure all asset files are in their correct directories
