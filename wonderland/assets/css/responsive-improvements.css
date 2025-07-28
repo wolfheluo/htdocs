@@ -1,0 +1,592 @@
+/* 響應式設計優化 - 修復排版空白問題 */
+
+/* CSS 變量定義 */
+:root {
+    --vh: 1vh;
+    --primary-color: #007acc;
+    --secondary-color: #005999;
+    --text-color: #333;
+    --light-bg: #ededed;
+    --white: #fff;
+    --shadow: rgba(0,0,0,0.1);
+}
+
+/* 基本排版優化 - 修復空白問題 */
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text-color);
+    height: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* 容器寬度限制 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 導航欄優化 */
+.menubar {
+    position: fixed;
+    top: 0;
+    height: 80px;
+    width: 100%;
+    background-color: rgba(238, 238, 238, 0.95);
+    z-index: 9999;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    box-sizing: border-box;
+}
+
+@media (min-width: 641px) {
+    .menubar {
+        height: 100px;
+        padding: 0 10%;
+    }
+}
+
+.menubar nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+@media (max-width: 640px) {
+    .menubar nav ul {
+        display: none;
+    }
+}
+
+.menubar nav ul li a {
+    display: block;
+    line-height: 80px;
+    padding: 0 15px;
+    color: #000;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+@media (min-width: 641px) {
+    .menubar nav ul li a {
+        line-height: 100px;
+        padding: 0 25px;
+    }
+}
+
+.menubar nav ul li a:hover {
+    background-color: #e8e8e8;
+    color: #007acc;
+}
+
+/* Logo 優化 */
+.logo {
+    height: 50px;
+    width: 90px;
+    background-image: url(../images/logo.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+@media (min-width: 641px) {
+    .logo {
+        height: 70px;
+        width: 126px;
+    }
+}
+
+/* 主屏幕優化 - 修復空白 */
+#screen-01 {
+    width: 100%;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 標語框優化 - 減少空白 */
+.sloganbox {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    z-index: 9999;
+    padding: 20px;
+}
+
+@media (max-width: 640px) {
+    .sloganbox {
+        width: 95%;
+        text-align: center;
+        padding: 15px;
+    }
+}
+
+.slogan {
+    padding: 5px 10px;
+    line-height: 1.3;
+    color: #fff;
+    font-weight: 100;
+    font-size: clamp(16px, 4vw, 24px);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    margin: 0 0 10px 0;
+}
+
+.slogan1 {
+    padding: 5px 10px;
+    line-height: 1.1;
+    color: #fff;
+    font-weight: 900;
+    font-size: clamp(28px, 7vw, 50px);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    margin: 0;
+}
+
+/* 內容區域優化 - 減少空白 */
+.screen-wrapper {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    background-color: var(--white);
+}
+
+#screen-02, #screen-03, #screen-04, #screen-05 {
+    width: 100%;
+    min-height: auto;
+    padding: 40px 0;
+}
+
+@media (min-width: 641px) {
+    #screen-02, #screen-03, #screen-04, #screen-05 {
+        padding: 60px 0;
+    }
+}
+
+#screen-02 {
+    background-color: var(--light-bg);
+}
+
+#screen-03 {
+    background-image: url(../images/honkong.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+}
+
+@media (max-width: 640px) {
+    #screen-03 {
+        background-attachment: scroll;
+    }
+}
+
+#screen-03::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1;
+}
+
+#screen-03 > * {
+    position: relative;
+    z-index: 2;
+}
+
+#screen-03 .text {
+    color: var(--white);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+}
+
+#screen-03 .heading {
+    color: var(--white);
+}
+
+/* 標題框優化 - 減少空白 */
+.headingbox {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.padding-sc02, .padding-sc03, .padding-sc04, .padding-sc05 {
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+
+@media (min-width: 641px) {
+    .padding-sc02, .padding-sc03, .padding-sc04, .padding-sc05 {
+        padding-top: 40px;
+        margin-bottom: 30px;
+    }
+}
+
+.heading {
+    font-size: clamp(18px, 4vw, 24px);
+    color: #222;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0 0 15px 0;
+}
+
+/* 文字內容優化 - 減少空白 */
+.col-1 {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.text {
+    text-align: justify;
+    font-size: clamp(14px, 2.5vw, 16px);
+    color: #222;
+    line-height: 1.5;
+    margin: 15px 0;
+}
+
+/* 聯絡表單優化 - 減少空白 */
+.colbox-2 {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+@media (min-width: 641px) {
+    .colbox-2 {
+        padding: 40px 20px;
+        gap: 40px;
+    }
+}
+
+.col-2 {
+    flex: 1;
+    min-width: 280px;
+}
+
+@media (max-width: 640px) {
+    .colbox-2 {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+    }
+    
+    .col-2 {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+/* 表單樣式優化 */
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #007acc;
+    box-shadow: 0 0 5px rgba(0, 122, 204, 0.3);
+}
+
+#anliegen {
+    height: 100px;
+    resize: vertical;
+}
+
+#submit {
+    background-color: #007acc;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+#submit:hover {
+    background-color: #005999;
+}
+
+.formtext {
+    display: block;
+    font-size: 14px;
+    color: #222;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    margin-bottom: 5px;
+}
+
+/* 子標題優化 */
+.subheading-kontakt {
+    font-size: clamp(16px, 3vw, 20px);
+    text-transform: uppercase;
+    color: #222;
+    font-weight: 300;
+    margin: 15px 0 10px 0;
+}
+
+.text-kontakt {
+    font-size: 14px;
+    color: #222;
+    line-height: 1.6;
+    margin: 10px 0 20px 0;
+    padding: 10px 0 10px 15px;
+    border-left: 3px solid #007acc;
+}
+
+/* 社交媒體圖標優化 - 減少空白 */
+.img_zeile {
+    width: 90%;
+    max-width: 300px;
+    margin: 20px auto;
+    text-align: center;
+    padding: 15px;
+}
+
+.img_zeile img {
+    width: 40px;
+    height: 40px;
+    margin: 0 10px;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    filter: grayscale(100%);
+}
+
+@media (min-width: 641px) {
+    .img_zeile img {
+        width: 45px;
+        height: 45px;
+        margin: 0 12px;
+    }
+}
+
+.img_zeile img:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+/* 背景幻燈片優化 */
+.bg-slideshow li span {
+    background-attachment: fixed;
+}
+
+@media (max-width: 640px) {
+    .bg-slideshow li span {
+        background-attachment: scroll;
+    }
+}
+
+/* 線條裝飾 */
+.linie {
+    width: 80px;
+    height: 8px;
+    margin: 10px auto;
+    background-image: url(../images/zigzag.svg);
+    background-size: 100% 100%;
+    background-repeat: repeat-x;
+}
+
+.kreuze-4 {
+    width: 40px;
+    height: 12px;
+    margin: 15px auto;
+    background-image: url(../images/kreuz.png);
+    background-repeat: repeat-x;
+}
+
+/* 清除浮動 */
+.clearing {
+    clear: both;
+    line-height: 0;
+    font-size: 0;
+    height: 0;
+}
+
+/* Footer 優化 */
+.linkschw {
+    text-align: center;
+    font-size: 13px;
+    margin: 20px auto;
+    padding: 15px 20px;
+    line-height: 1.4;
+}
+
+@media (min-width: 641px) {
+    .linkschw {
+        font-size: 14px;
+        margin: 25px auto;
+        padding: 20px;
+    }
+}
+
+.linkschw a {
+    color: #007acc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.linkschw a:hover {
+    color: #005999;
+    text-decoration: underline;
+}
+
+/* 響應式字體大小 */
+@media (max-width: 480px) {
+    .heading {
+        font-size: 16px;
+    }
+    
+    .text {
+        font-size: 13px;
+    }
+    
+    .slogan {
+        font-size: 14px;
+    }
+    
+    .slogan1 {
+        font-size: 24px;
+    }
+}
+
+/* 改善可訪問性 */
+a {
+    color: #007acc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #005999;
+    text-decoration: underline;
+}
+
+/* 性能優化 */
+* {
+    box-sizing: border-box;
+}
+
+/* 圖片優化 */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 焦點樣式 */
+button:focus,
+input:focus,
+textarea:focus,
+a:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* 打印樣式 */
+@media print {
+    .menubar,
+    .bg-slideshow,
+    audio,
+    button {
+        display: none !important;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .text {
+        color: black !important;
+    }
+}
+
+/* 高對比度支持 */
+@media (prefers-contrast: high) {
+    .menubar {
+        background-color: white;
+        border-bottom: 2px solid black;
+    }
+    
+    .menubar nav ul li a {
+        color: black;
+    }
+    
+    .text {
+        color: black;
+    }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #e0e0e0;
+        --light-bg: #2d2d2d;
+        --white: #1a1a1a;
+    }
+    
+    .menubar {
+        background-color: rgba(42, 42, 42, 0.95);
+    }
+    
+    .menubar nav ul li a {
+        color: #e0e0e0;
+    }
+    
+    .menubar nav ul li a:hover {
+        background-color: #555;
+    }
+}
+
+/* 平滑滾動優化 */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
