@@ -113,6 +113,7 @@ function createServiceCard(service, index) {
         <div class="service-card" style="animation-delay: ${index * 0.1}s">
             <h3>${escapeHtml(service.name)}</h3>
             <a href="${escapeHtml(service.url)}" target="_blank" class="service-url">${escapeHtml(service.url)}</a>
+            <div class="service-context">${escapeHtml(service.context)}</div>
         </div>
     `);
 }
