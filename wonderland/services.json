@@ -6,11 +6,6 @@
       "context": "Minecraft Java"
     },
     {
-      "name": "Minecraft Server",
-      "url": "165.154.226.23:19132",
-      "context": "Minecraft Bedrock"
-    },
-    {
       "name": "Minecraft Rcon",
       "url": "http://165.154.226.233:5020/",
       "context": "general"
