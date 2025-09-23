@@ -293,6 +293,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
 
             async fetchMessages() {
                 try {
+                    console.log('開始獲取訊息...');
                     const response = await fetch('?action=fetch_messages');
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
@@ -321,10 +322,13 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
             }
 
             startDisplay() {
-                // 隱藏載入提示
-                if (this.loading) {
-                    this.loading.style.display = 'none';
+                // 確保載入提示被完全移除
+                if (this.loading && this.loading.parentNode) {
+                    this.loading.parentNode.removeChild(this.loading);
+                    this.loading = null;
                 }
+                
+                console.log('開始顯示彈幕...');
                 
                 // 立即顯示第一條彈幕
                 this.createDanmaku();
@@ -411,8 +415,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
             }
 
             showError() {
-                if (this.loading) {
-                    this.loading.style.display = 'none';
+                // 確保載入提示被完全移除
+                if (this.loading && this.loading.parentNode) {
+                    this.loading.parentNode.removeChild(this.loading);
+                    this.loading = null;
                 }
                 this.error.style.display = 'block';
             }
@@ -429,9 +435,17 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
                 // 重置軌道狀態
                 this.tracks.fill(false);
                 
-                if (this.loading) {
-                    this.loading.style.display = 'block';
+                // 重新創建載入提示（如果需要）
+                if (!this.loading) {
+                    this.loading = document.createElement('div');
+                    this.loading.className = 'loading';
+                    this.loading.innerHTML = `
+                        <div class="spinner"></div>
+                        載入訊息中...
+                    `;
+                    this.container.appendChild(this.loading);
                 }
+                
                 this.error.style.display = 'none';
                 
                 await this.init();
