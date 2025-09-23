@@ -65,11 +65,28 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
         }
 
         body {
-            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
-            font-family: 'Microsoft JhengHei', sans-serif;
+            background: #f8f8f8;
+            font-family: 'Microsoft JhengHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             height: 100vh;
             overflow: hidden;
             position: relative;
+            cursor: none;
+        }
+
+        /* 簡約線條背景 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px),
+                linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+                linear-gradient(45deg, transparent 35%, rgba(0,0,0,0.01) 35%, rgba(0,0,0,0.01) 65%, transparent 65%);
+            background-size: 60px 60px, 60px 60px, 120px 120px;
+            z-index: -1;
         }
 
         .container {
@@ -79,57 +96,65 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
             overflow: hidden;
         }
 
-        .floating-message {
+        /* 彈幕樣式 */
+        .danmaku-message {
             position: absolute;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 15px 25px;
-            border-radius: 25px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px 16px;
+            border-radius: 20px;
             font-size: 16px;
             color: #333;
-            max-width: 300px;
-            word-wrap: break-word;
-            animation: float-around 15s infinite linear;
+            white-space: nowrap;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            animation: danmaku-scroll linear;
             opacity: 0;
-            transition: opacity 0.5s ease-in-out;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            z-index: 10;
         }
 
-        .floating-message.visible {
-            opacity: 1;
+        .danmaku-message.visible {
+            opacity: 0.9;
         }
 
-        .floating-message::before {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
-            border-radius: 30px;
-            z-index: -1;
-            filter: blur(5px);
-            opacity: 0.7;
+        .danmaku-message:hover {
+            opacity: 1 !important;
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            animation-play-state: paused;
+            background: rgba(255, 255, 255, 1);
+            z-index: 100;
         }
 
-        @keyframes float-around {
+        /* 彈幕動畫 */
+        @keyframes danmaku-scroll {
             0% {
-                transform: translateX(-100px) translateY(50vh) rotate(0deg);
-            }
-            25% {
-                transform: translateX(25vw) translateY(20vh) rotate(90deg);
-            }
-            50% {
-                transform: translateX(75vw) translateY(70vh) rotate(180deg);
-            }
-            75% {
-                transform: translateX(50vw) translateY(10vh) rotate(270deg);
+                transform: translateX(100vw);
             }
             100% {
-                transform: translateX(100vw) translateY(50vh) rotate(360deg);
+                transform: translateX(-100%);
             }
+        }
+
+        /* 自定義鼠標游標 */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            border: 2px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .custom-cursor.hover {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.3);
         }
 
         .loading {
@@ -137,19 +162,19 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: white;
-            font-size: 24px;
+            color: #666;
+            font-size: 20px;
             text-align: center;
         }
 
         .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid white;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-top: 3px solid #666;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+            margin: 0 auto 15px;
         }
 
         @keyframes spin {
@@ -162,50 +187,76 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: #ff6b6b;
-            font-size: 18px;
+            color: #999;
+            font-size: 16px;
             text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px 30px;
             border-radius: 10px;
-            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
-        /* 不同大小的訊息氣泡 */
-        .size-small { font-size: 14px; max-width: 200px; }
-        .size-medium { font-size: 16px; max-width: 300px; }
-        .size-large { font-size: 18px; max-width: 400px; }
+        /* 彈幕軌道定義 */
+        .track-1 { top: 10%; }
+        .track-2 { top: 20%; }
+        .track-3 { top: 30%; }
+        .track-4 { top: 40%; }
+        .track-5 { top: 50%; }
+        .track-6 { top: 60%; }
+        .track-7 { top: 70%; }
+        .track-8 { top: 80%; }
 
-        /* 不同速度的動畫 */
-        .speed-slow { animation-duration: 25s; }
-        .speed-normal { animation-duration: 15s; }
-        .speed-fast { animation-duration: 10s; }
+        /* 不同速度 */
+        .speed-slow { animation-duration: 20s; }
+        .speed-normal { animation-duration: 12s; }
+        .speed-fast { animation-duration: 8s; }
 
-        /* 不同方向的動畫 */
-        @keyframes float-reverse {
+        /* 不同顏色主題 */
+        .theme-blue { 
+            background: rgba(59, 130, 246, 0.1); 
+            border-color: rgba(59, 130, 246, 0.2);
+            color: #1e40af;
+        }
+        .theme-green { 
+            background: rgba(34, 197, 94, 0.1); 
+            border-color: rgba(34, 197, 94, 0.2);
+            color: #15803d;
+        }
+        .theme-purple { 
+            background: rgba(168, 85, 247, 0.1); 
+            border-color: rgba(168, 85, 247, 0.2);
+            color: #7c3aed;
+        }
+        .theme-pink { 
+            background: rgba(236, 72, 153, 0.1); 
+            border-color: rgba(236, 72, 153, 0.2);
+            color: #be185d;
+        }
+
+        /* 點擊波紋效果 */
+        @keyframes ripple {
             0% {
-                transform: translateX(100vw) translateY(30vh) rotate(0deg);
-            }
-            25% {
-                transform: translateX(75vw) translateY(80vh) rotate(-90deg);
-            }
-            50% {
-                transform: translateX(25vw) translateY(20vh) rotate(-180deg);
-            }
-            75% {
-                transform: translateX(50vw) translateY(90vh) rotate(-270deg);
+                transform: scale(0);
+                opacity: 0.8;
             }
             100% {
-                transform: translateX(-100px) translateY(30vh) rotate(-360deg);
+                transform: scale(4);
+                opacity: 0;
             }
         }
 
-        .direction-reverse {
-            animation-name: float-reverse;
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.1);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
+    <div class="custom-cursor" id="customCursor"></div>
     <div class="container" id="container">
         <div class="loading" id="loading">
             <div class="spinner"></div>
@@ -217,14 +268,81 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
     </div>
 
     <script>
-        class MessageDisplay {
+        class DanmakuDisplay {
             constructor() {
                 this.messages = [];
                 this.container = document.getElementById('container');
-                this.loading = document.getElementById('loading');
-                this.error = document.getElementById('error');
+                this.loading = null;
+                this.error = null;
                 this.displayInterval = null;
+                this.tracks = Array(8).fill(false); // 8個軌道的占用狀態
+                this.customCursor = document.getElementById('customCursor');
+                
+                this.createUI();
+                this.initCursor();
                 this.init();
+            }
+
+            createUI() {
+                // 創建載入提示
+                this.loading = document.createElement('div');
+                this.loading.className = 'loading';
+                this.loading.innerHTML = `
+                    <div class="spinner"></div>
+                    載入訊息中...
+                `;
+                this.container.appendChild(this.loading);
+
+                // 創建錯誤提示
+                this.error = document.createElement('div');
+                this.error.className = 'error';
+                this.error.style.display = 'none';
+                this.error.textContent = '載入訊息失敗，點擊重試';
+                this.container.appendChild(this.error);
+            }
+
+            initCursor() {
+                // 自定義鼠標游標
+                document.addEventListener('mousemove', (e) => {
+                    this.customCursor.style.left = e.clientX - 10 + 'px';
+                    this.customCursor.style.top = e.clientY - 10 + 'px';
+                });
+
+                // 鼠標懸停效果
+                document.addEventListener('mouseover', (e) => {
+                    if (e.target.classList.contains('danmaku-message')) {
+                        this.customCursor.classList.add('hover');
+                    }
+                });
+
+                document.addEventListener('mouseout', (e) => {
+                    if (e.target.classList.contains('danmaku-message')) {
+                        this.customCursor.classList.remove('hover');
+                    }
+                });
+
+                // 點擊波紋效果
+                document.addEventListener('click', (e) => {
+                    this.createRipple(e.clientX, e.clientY);
+                    
+                    if (this.error.style.display !== 'none') {
+                        this.reload();
+                    }
+                });
+            }
+
+            createRipple(x, y) {
+                const ripple = document.createElement('div');
+                ripple.className = 'ripple';
+                ripple.style.left = x - 10 + 'px';
+                ripple.style.top = y - 10 + 'px';
+                ripple.style.width = '20px';
+                ripple.style.height = '20px';
+                document.body.appendChild(ripple);
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
             }
 
             async init() {
@@ -269,75 +387,101 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
             startDisplay() {
                 this.loading.style.display = 'none';
                 
-                // 立即顯示第一條訊息
-                this.createFloatingMessage();
+                // 立即顯示第一條彈幕
+                this.createDanmaku();
                 
-                // 設定定時器，每隔 2-5 秒隨機顯示新訊息
+                // 設定定時器，每隔 1-3 秒隨機顯示新彈幕
                 this.displayInterval = setInterval(() => {
-                    this.createFloatingMessage();
-                }, this.getRandomInterval(2000, 5000));
+                    this.createDanmaku();
+                }, this.getRandomInterval(1000, 3000));
             }
 
-            createFloatingMessage() {
+            createDanmaku() {
                 if (this.messages.length === 0) return;
 
                 const message = this.getRandomMessage();
-                const messageElement = document.createElement('div');
-                messageElement.className = this.getRandomClasses();
-                messageElement.textContent = message;
-
-                // 設定隨機起始位置
-                const startPositions = [
-                    { left: '-200px', top: Math.random() * 80 + '%' }, // 從左邊進入
-                    { left: '100vw', top: Math.random() * 80 + '%' },   // 從右邊進入
-                    { left: Math.random() * 80 + '%', top: '-100px' }, // 從上方進入
-                    { left: Math.random() * 80 + '%', top: '100vh' }   // 從下方進入
-                ];
+                const danmaku = document.createElement('div');
+                const track = this.getAvailableTrack();
                 
-                const startPos = startPositions[Math.floor(Math.random() * startPositions.length)];
-                messageElement.style.left = startPos.left;
-                messageElement.style.top = startPos.top;
+                if (track === -1) return; // 沒有可用軌道
 
-                this.container.appendChild(messageElement);
+                danmaku.className = this.getDanmakuClasses(track);
+                danmaku.textContent = message;
+
+                // 標記軌道為占用
+                this.tracks[track] = true;
+
+                this.container.appendChild(danmaku);
 
                 // 顯示動畫
                 setTimeout(() => {
-                    messageElement.classList.add('visible');
+                    danmaku.classList.add('visible');
                 }, 100);
 
-                // 清理舊訊息（避免 DOM 元素過多）
+                // 添加點擊事件
+                danmaku.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.onDanmakuClick(danmaku);
+                });
+
+                // 清理和釋放軌道
+                const duration = this.getAnimationDuration(danmaku);
                 setTimeout(() => {
-                    if (messageElement && messageElement.parentNode) {
-                        messageElement.style.opacity = '0';
+                    this.tracks[track] = false; // 釋放軌道
+                }, duration * 0.3); // 30% 動畫完成後就可以釋放軌道
+
+                setTimeout(() => {
+                    if (danmaku && danmaku.parentNode) {
+                        danmaku.style.opacity = '0';
                         setTimeout(() => {
-                            if (messageElement && messageElement.parentNode) {
-                                messageElement.parentNode.removeChild(messageElement);
+                            if (danmaku && danmaku.parentNode) {
+                                danmaku.parentNode.removeChild(danmaku);
                             }
-                        }, 500);
+                        }, 300);
                     }
-                }, this.getAnimationDuration(messageElement) + 1000);
+                }, duration);
+            }
+
+            onDanmakuClick(danmaku) {
+                // 彈幕點擊效果
+                danmaku.style.transform = 'scale(1.2)';
+                danmaku.style.background = 'rgba(255, 255, 255, 1)';
+                danmaku.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.2)';
+                
+                setTimeout(() => {
+                    danmaku.style.transform = 'scale(1.05)';
+                }, 200);
+            }
+
+            getAvailableTrack() {
+                // 找到第一個可用的軌道
+                for (let i = 0; i < this.tracks.length; i++) {
+                    if (!this.tracks[i]) {
+                        return i;
+                    }
+                }
+                return -1; // 沒有可用軌道
+            }
+
+            getDanmakuClasses(track) {
+                const speeds = ['speed-slow', 'speed-normal', 'speed-fast'];
+                const themes = ['theme-blue', 'theme-green', 'theme-purple', 'theme-pink', ''];
+
+                const speedClass = speeds[Math.floor(Math.random() * speeds.length)];
+                const themeClass = themes[Math.floor(Math.random() * themes.length)];
+                const trackClass = `track-${track + 1}`;
+
+                return `danmaku-message ${trackClass} ${speedClass} ${themeClass}`.trim();
+            }
+
+            getAnimationDuration(element) {
+                if (element.classList.contains('speed-slow')) return 20000;
+                if (element.classList.contains('speed-fast')) return 8000;
+                return 12000; // normal speed
             }
 
             getRandomMessage() {
                 return this.messages[Math.floor(Math.random() * this.messages.length)];
-            }
-
-            getRandomClasses() {
-                const sizes = ['size-small', 'size-medium', 'size-large'];
-                const speeds = ['speed-slow', 'speed-normal', 'speed-fast'];
-                const directions = ['', 'direction-reverse'];
-
-                const sizeClass = sizes[Math.floor(Math.random() * sizes.length)];
-                const speedClass = speeds[Math.floor(Math.random() * speeds.length)];
-                const directionClass = directions[Math.floor(Math.random() * directions.length)];
-
-                return `floating-message ${sizeClass} ${speedClass} ${directionClass}`.trim();
-            }
-
-            getAnimationDuration(element) {
-                if (element.classList.contains('speed-slow')) return 25000;
-                if (element.classList.contains('speed-fast')) return 10000;
-                return 15000; // normal speed
             }
 
             getRandomInterval(min, max) {
@@ -349,15 +493,17 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
                 this.error.style.display = 'block';
             }
 
-            // 重新載入訊息的方法
             async reload() {
                 if (this.displayInterval) {
                     clearInterval(this.displayInterval);
                 }
                 
-                // 清除現有訊息
-                const existingMessages = this.container.querySelectorAll('.floating-message');
-                existingMessages.forEach(msg => msg.remove());
+                // 清除現有彈幕
+                const existingDanmaku = this.container.querySelectorAll('.danmaku-message');
+                existingDanmaku.forEach(d => d.remove());
+                
+                // 重置軌道狀態
+                this.tracks.fill(false);
                 
                 this.loading.style.display = 'block';
                 this.error.style.display = 'none';
@@ -367,19 +513,23 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
         }
 
         // 初始化
-        const messageDisplay = new MessageDisplay();
+        const danmakuDisplay = new DanmakuDisplay();
 
-        // 點擊頁面重新載入（可選功能）
-        document.addEventListener('click', () => {
-            if (document.getElementById('error').style.display !== 'none') {
-                messageDisplay.reload();
-            }
-        });
-
-        // 鍵盤快捷鍵重新載入
+        // 鍵盤快捷鍵
         document.addEventListener('keydown', (e) => {
             if (e.key === 'r' || e.key === 'R') {
-                messageDisplay.reload();
+                danmakuDisplay.reload();
+            }
+            if (e.key === ' ') { // 空格鍵暫停/恢復
+                e.preventDefault();
+                const danmakus = document.querySelectorAll('.danmaku-message');
+                danmakus.forEach(d => {
+                    if (d.style.animationPlayState === 'paused') {
+                        d.style.animationPlayState = 'running';
+                    } else {
+                        d.style.animationPlayState = 'paused';
+                    }
+                });
             }
         });
     </script>
