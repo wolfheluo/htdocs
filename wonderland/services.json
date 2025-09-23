@@ -1,14 +1,9 @@
 {
   "services": [
     {
-      "name": "Minecraft Server",
-      "url": "165.154.226.23:25565",
-      "context": "Minecraft Java"
-    },
-    {
-      "name": "Minecraft Rcon",
-      "url": "http://165.154.226.233:5020/",
-      "context": "general"
+      "name": "",
+      "url": "",
+      "context": ""
     }
   ]
 }
