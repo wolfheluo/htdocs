@@ -70,7 +70,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
             height: 100vh;
             overflow: hidden;
             position: relative;
-            cursor: none;
         }
 
         /* 簡約線條背景 */
@@ -122,7 +121,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
             opacity: 1 !important;
             transform: scale(1.05);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-            animation-play-state: paused;
             background: rgba(255, 255, 255, 1);
             z-index: 100;
         }
@@ -135,26 +133,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
             100% {
                 transform: translateX(-100%);
             }
-        }
-
-        /* 自定義鼠標游標 */
-        .custom-cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            background: rgba(0, 0, 0, 0.1);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: all 0.1s ease;
-            border: 2px solid rgba(0, 0, 0, 0.2);
-        }
-
-        .custom-cursor.hover {
-            width: 40px;
-            height: 40px;
-            background: rgba(0, 0, 0, 0.05);
-            border-color: rgba(0, 0, 0, 0.3);
         }
 
         .loading {
@@ -256,7 +234,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
     </style>
 </head>
 <body>
-    <div class="custom-cursor" id="customCursor"></div>
     <div class="container" id="container">
         <div class="loading" id="loading">
             <div class="spinner"></div>
@@ -276,10 +253,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
                 this.error = null;
                 this.displayInterval = null;
                 this.tracks = Array(8).fill(false); // 8個軌道的占用狀態
-                this.customCursor = document.getElementById('customCursor');
                 
                 this.createUI();
-                this.initCursor();
                 this.init();
             }
 
@@ -299,50 +274,11 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
                 this.error.style.display = 'none';
                 this.error.textContent = '載入訊息失敗，點擊重試';
                 this.container.appendChild(this.error);
-            }
 
-            initCursor() {
-                // 自定義鼠標游標
-                document.addEventListener('mousemove', (e) => {
-                    this.customCursor.style.left = e.clientX - 10 + 'px';
-                    this.customCursor.style.top = e.clientY - 10 + 'px';
+                // 錯誤點擊重試
+                this.error.addEventListener('click', () => {
+                    this.reload();
                 });
-
-                // 鼠標懸停效果
-                document.addEventListener('mouseover', (e) => {
-                    if (e.target.classList.contains('danmaku-message')) {
-                        this.customCursor.classList.add('hover');
-                    }
-                });
-
-                document.addEventListener('mouseout', (e) => {
-                    if (e.target.classList.contains('danmaku-message')) {
-                        this.customCursor.classList.remove('hover');
-                    }
-                });
-
-                // 點擊波紋效果
-                document.addEventListener('click', (e) => {
-                    this.createRipple(e.clientX, e.clientY);
-                    
-                    if (this.error.style.display !== 'none') {
-                        this.reload();
-                    }
-                });
-            }
-
-            createRipple(x, y) {
-                const ripple = document.createElement('div');
-                ripple.className = 'ripple';
-                ripple.style.left = x - 10 + 'px';
-                ripple.style.top = y - 10 + 'px';
-                ripple.style.width = '20px';
-                ripple.style.height = '20px';
-                document.body.appendChild(ripple);
-
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
             }
 
             async init() {
@@ -385,7 +321,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
             }
 
             startDisplay() {
-                this.loading.style.display = 'none';
+                // 隱藏載入提示
+                if (this.loading) {
+                    this.loading.style.display = 'none';
+                }
                 
                 // 立即顯示第一條彈幕
                 this.createDanmaku();
@@ -418,12 +357,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
                     danmaku.classList.add('visible');
                 }, 100);
 
-                // 添加點擊事件
-                danmaku.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    this.onDanmakuClick(danmaku);
-                });
-
                 // 清理和釋放軌道
                 const duration = this.getAnimationDuration(danmaku);
                 setTimeout(() => {
@@ -440,17 +373,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
                         }, 300);
                     }
                 }, duration);
-            }
-
-            onDanmakuClick(danmaku) {
-                // 彈幕點擊效果
-                danmaku.style.transform = 'scale(1.2)';
-                danmaku.style.background = 'rgba(255, 255, 255, 1)';
-                danmaku.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.2)';
-                
-                setTimeout(() => {
-                    danmaku.style.transform = 'scale(1.05)';
-                }, 200);
             }
 
             getAvailableTrack() {
@@ -489,7 +411,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
             }
 
             showError() {
-                this.loading.style.display = 'none';
+                if (this.loading) {
+                    this.loading.style.display = 'none';
+                }
                 this.error.style.display = 'block';
             }
 
@@ -505,7 +429,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
                 // 重置軌道狀態
                 this.tracks.fill(false);
                 
-                this.loading.style.display = 'block';
+                if (this.loading) {
+                    this.loading.style.display = 'block';
+                }
                 this.error.style.display = 'none';
                 
                 await this.init();
