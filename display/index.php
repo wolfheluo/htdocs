@@ -322,13 +322,14 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
             }
 
             startDisplay() {
-                // 確保載入提示被完全移除
-                if (this.loading && this.loading.parentNode) {
-                    this.loading.parentNode.removeChild(this.loading);
-                    this.loading = null;
-                }
-                
                 console.log('開始顯示彈幕...');
+                
+                // 確保載入提示被完全移除 - 直接從container中查找並移除
+                const loadingElements = this.container.querySelectorAll('.loading');
+                loadingElements.forEach(element => {
+                    element.remove();
+                });
+                this.loading = null;
                 
                 // 立即顯示第一條彈幕
                 this.createDanmaku();
@@ -341,6 +342,12 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
 
             createDanmaku() {
                 if (this.messages.length === 0) return;
+
+                // 額外安全檢查：確保沒有殘留的載入元素
+                const loadingElements = this.container.querySelectorAll('.loading');
+                if (loadingElements.length > 0) {
+                    loadingElements.forEach(element => element.remove());
+                }
 
                 const message = this.getRandomMessage();
                 const danmaku = document.createElement('div');
@@ -415,11 +422,13 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
             }
 
             showError() {
-                // 確保載入提示被完全移除
-                if (this.loading && this.loading.parentNode) {
-                    this.loading.parentNode.removeChild(this.loading);
-                    this.loading = null;
-                }
+                // 確保載入提示被完全移除 - 直接從container中查找並移除
+                const loadingElements = this.container.querySelectorAll('.loading');
+                loadingElements.forEach(element => {
+                    element.remove();
+                });
+                this.loading = null;
+                
                 this.error.style.display = 'block';
             }
 
@@ -452,25 +461,27 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
             }
         }
 
-        // 初始化
-        const danmakuDisplay = new DanmakuDisplay();
-
-        // 鍵盤快捷鍵
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'r' || e.key === 'R') {
-                danmakuDisplay.reload();
-            }
-            if (e.key === ' ') { // 空格鍵暫停/恢復
-                e.preventDefault();
-                const danmakus = document.querySelectorAll('.danmaku-message');
-                danmakus.forEach(d => {
-                    if (d.style.animationPlayState === 'paused') {
-                        d.style.animationPlayState = 'running';
-                    } else {
-                        d.style.animationPlayState = 'paused';
-                    }
-                });
-            }
+        // DOM載入完成後初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            const danmakuDisplay = new DanmakuDisplay();
+            
+            // 鍵盤快捷鍵
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'r' || e.key === 'R') {
+                    danmakuDisplay.reload();
+                }
+                if (e.key === ' ') { // 空格鍵暫停/恢復
+                    e.preventDefault();
+                    const danmakus = document.querySelectorAll('.danmaku-message');
+                    danmakus.forEach(d => {
+                        if (d.style.animationPlayState === 'paused') {
+                            d.style.animationPlayState = 'running';
+                        } else {
+                            d.style.animationPlayState = 'paused';
+                        }
+                    });
+                }
+            });
         });
     </script>
 </body>
