@@ -103,7 +103,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
             border-radius: 20px;
             font-size: 16px;
             color: #333;
-            white-space: nowrap;
+            max-width: 400px;
+            word-wrap: break-word;
+            word-break: break-word;
+            line-height: 1.4;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
             border: 1px solid rgba(0, 0, 0, 0.05);
             animation: danmaku-scroll linear;
@@ -175,15 +178,15 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
             border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
-        /* 彈幕軌道定義 */
-        .track-1 { top: 10%; }
-        .track-2 { top: 20%; }
-        .track-3 { top: 30%; }
-        .track-4 { top: 40%; }
-        .track-5 { top: 50%; }
-        .track-6 { top: 60%; }
-        .track-7 { top: 70%; }
-        .track-8 { top: 80%; }
+        /* 彈幕軌道定義 - 調整間距適應多行顯示 */
+        .track-1 { top: 5%; }
+        .track-2 { top: 18%; }
+        .track-3 { top: 31%; }
+        .track-4 { top: 44%; }
+        .track-5 { top: 57%; }
+        .track-6 { top: 70%; }
+        .track-7 { top: 83%; }
+        .track-8 { top: 96%; transform: translateY(-100%); } /* 最後一個軌道向上偏移 */
 
         /* 不同速度 */
         .speed-slow { animation-duration: 20s; }
@@ -356,7 +359,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
                 if (track === -1) return; // 沒有可用軌道
 
                 danmaku.className = this.getDanmakuClasses(track);
-                danmaku.textContent = message;
+                
+                // 處理換行符和其他轉義字符
+                const processedMessage = this.processMessageContent(message);
+                danmaku.innerHTML = processedMessage;
 
                 // 標記軌道為占用
                 this.tracks[track] = true;
@@ -415,6 +421,30 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
 
             getRandomMessage() {
                 return this.messages[Math.floor(Math.random() * this.messages.length)];
+            }
+
+            processMessageContent(message) {
+                // 首先進行HTML轉義，防止XSS攻擊
+                const escapeHtml = (text) => {
+                    const div = document.createElement('div');
+                    div.textContent = text;
+                    return div.innerHTML;
+                };
+                
+                let processedMessage = escapeHtml(message);
+                
+                // 處理各種換行符和轉義字符
+                processedMessage = processedMessage
+                    .replace(/\\n/g, '<br>')           // 處理 \n
+                    .replace(/\\r\\n/g, '<br>')       // 處理 \r\n
+                    .replace(/\\r/g, '<br>')          // 處理 \r
+                    .replace(/\n/g, '<br>')           // 處理實際的換行符
+                    .replace(/\r\n/g, '<br>')         // 處理實際的 \r\n
+                    .replace(/\r/g, '<br>')           // 處理實際的 \r
+                    .replace(/\\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;') // 處理 \t (轉為4個空格)
+                    .replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;');   // 處理實際的tab
+                
+                return processedMessage;
             }
 
             getRandomInterval(min, max) {
