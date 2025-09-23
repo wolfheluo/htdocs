@@ -1,3 +1,56 @@
+<?php
+// 處理 AJAX 請求
+if (isset($_GET['action']) && $_GET['action'] === 'fetch_messages') {
+    header('Content-Type: application/json; charset=utf-8');
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: GET');
+    header('Access-Control-Allow-Headers: Content-Type');
+    
+    try {
+        $url = 'https://16888gk.com/line-api-wolf/static/messages.json';
+        
+        // 使用 cURL 獲取數據
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36');
+        
+        $data = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error = curl_error($ch);
+        curl_close($ch);
+        
+        if ($data === false || !empty($error)) {
+            throw new Exception('cURL Error: ' . $error);
+        }
+        
+        if ($httpCode !== 200) {
+            throw new Exception('HTTP Error: ' . $httpCode);
+        }
+        
+        // 驗證 JSON 格式
+        $jsonData = json_decode($data, true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new Exception('Invalid JSON: ' . json_last_error_msg());
+        }
+        
+        // 直接輸出獲取到的 JSON 數據
+        echo $data;
+        exit;
+        
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode([
+            'error' => true,
+            'message' => '獲取訊息失敗: ' . $e->getMessage()
+        ]);
+        exit;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -186,11 +239,16 @@
 
             async fetchMessages() {
                 try {
-                    const response = await fetch('https://16888gk.com/line-api-wolf/static/messages.json');
+                    const response = await fetch('?action=fetch_messages');
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     const data = await response.json();
+                    
+                    // 檢查是否有錯誤回應
+                    if (data.error) {
+                        throw new Error(data.message || '未知錯誤');
+                    }
                     
                     // 只提取 message 字段，並過濾空訊息
                     this.messages = data
