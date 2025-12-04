@@ -22,6 +22,11 @@ if (!isset($_SESSION['counted'])) {
     $_SESSION['counted'] = true;
 }
 
+// 格式化計數顯示
+function formatCount($num) {
+    return number_format($num);
+}
+
 // 返回計數（用於 AJAX 請求）
 if (($_GET['action'] ?? '') === 'get_count') {
     header('Content-Type: application/json');
