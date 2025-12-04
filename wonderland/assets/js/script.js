@@ -30,21 +30,34 @@ function initMusicControl() {
     const musicToggle = document.getElementById('musicToggle');
     let isPlaying = false;
 
-    // Set default volume to 30%
-    audio.volume = 0.3;
+    // Set default volume to 15% (reduced by 50% from previous 30%)
+    audio.volume = 0.15;
 
-    // Auto-start music when page loads (with user interaction requirement handled)
-    $(document).one('click', function() {
-        if (!isPlaying) {
-            audio.play().then(() => {
-                musicToggle.innerHTML = '🎶';
-                musicToggle.style.background = 'var(--gradient-accent)';
-                isPlaying = true;
-            }).catch((error) => {
-                console.log('Music playback failed:', error);
+    // Try to auto-play music immediately when page loads
+    function tryAutoPlay() {
+        audio.play().then(() => {
+            musicToggle.innerHTML = '🎶';
+            musicToggle.style.background = 'var(--gradient-accent)';
+            isPlaying = true;
+        }).catch((error) => {
+            console.log('Auto-play blocked by browser, waiting for user interaction:', error);
+            // If auto-play fails, set up one-time click listener as fallback
+            $(document).one('click touchstart', function() {
+                if (!isPlaying) {
+                    audio.play().then(() => {
+                        musicToggle.innerHTML = '🎶';
+                        musicToggle.style.background = 'var(--gradient-accent)';
+                        isPlaying = true;
+                    }).catch((err) => {
+                        console.log('Music playback failed:', err);
+                    });
+                }
             });
-        }
-    });
+        });
+    }
+
+    // Attempt auto-play on page load
+    tryAutoPlay();
 
     musicToggle.addEventListener('click', function() {
         if (isPlaying) {
