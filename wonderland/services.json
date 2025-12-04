@@ -1,9 +1,0 @@
-{
-  "services": [
-    {
-      "name": "DISPLAY",
-      "url": "/display",
-      "context": "NICE WORDS"
-    }
-  ]
-}
