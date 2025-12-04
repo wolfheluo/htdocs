@@ -568,7 +568,7 @@ require_once 'counter.php';
     </div>
 
     <header class="header">
-        <h1>💭 心事小卡</h1>
+        <!-- <h1>💭 心事小卡</h1> -->
         <p>每一句話，都是一張翻動心靈的卡片</p>
         <div class="visitor-count">
             <span class="heart">♥</span>
