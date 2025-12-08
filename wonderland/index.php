@@ -578,10 +578,10 @@
                 <span class="feature-badge">進入體驗 →</span>
             </a>
 
-            <!-- 暗夜句庫 Card -->
+            <!-- 愛不能只靠感動 Card -->
             <a href="display/PPT.php" class="feature-card">
                 <div class="feature-icon">🌙</div>
-                <h3>暗夜句庫</h3>
+                <h3>愛不能只靠感動</h3>
                 <p>沉浸在紫色星光中，讓每一句話隨著粒子飄揚。30秒自動切換，帶來不一樣的心靈觸動。</p>
                 <span class="feature-badge">進入體驗 →</span>
             </a>
