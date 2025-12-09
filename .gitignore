@@ -1,6 +1,8 @@
 # OS
 .DS_Store
 Thumbs.db
+.user.ini
+
 
 # IDE
 .vscode/
